@@ -6,7 +6,7 @@
 
 ``` js
 function a(){
-    var user = "追梦子";
+    var user = "追梦者";
     console.log(this.user); //undefined
     console.log(this); //Window
 }
@@ -15,7 +15,7 @@ a();
 就等同于
 
 function a(){
-    var user = "追梦子";
+    var user = "追梦者";
     console.log(this.user); //undefined
     console.log(this);　　//Window
 }
@@ -26,9 +26,9 @@ window.a();
 
 ``` js
 var o = {
-    user:"追梦子",
+    user:"追梦者",
     fn:function(){
-        console.log(this.user);  //追梦子
+        console.log(this.user);  //追梦者
     }
 }
 o.fn();
@@ -38,9 +38,9 @@ o.fn();
 
 ``` js
 var o = {
-    user:"追梦子",
+    user:"追梦者",
     fn:function(){
-        console.log(this.user); //追梦子
+        console.log(this.user); //追梦者
     }
 }
 window.o.fn();
@@ -72,7 +72,7 @@ o.b.fn()
 ``` js
 function fn()  
 {  
-    this.user = '追梦子';  
+    this.user = '追梦者';  
     return function(){};
 }
 var a = new fn;  
@@ -81,7 +81,7 @@ console.log(a.user); //undefined
 
 function fn()  
 {  
-    this.user = '追梦子';  
+    this.user = '追梦者';  
     return {};  
 }
 var a = new fn;  
@@ -89,11 +89,11 @@ console.log(a.user); //undefined
 
 function fn()  
 {  
-    this.user = '追梦子';  
+    this.user = '追梦者';  
     return 1;
 }
 var a = new fn;  
-console.log(a.user); //追梦子
+console.log(a.user); //追梦者
 ```
 
 - - 在严格版中的默认的this不再是window，而是undefined。
