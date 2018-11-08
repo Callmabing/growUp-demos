@@ -1,13 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <router-view :data="manInfo" @childEvent="person"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      manInfo: {
+        name: "JackSon",
+        age: 25,
+        favorite: "banana"
+      }
+    }
+  },
+  methods: {
+    person: function(value){
+      console.log(value)
+    }
+  }
 }
 </script>
 

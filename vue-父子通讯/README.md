@@ -4,6 +4,9 @@
 
 ## Build Setup
 
+#介绍
+此demo有关vue父子之间的通信与传值
+
 ``` bash
 # install dependencies
 npm install
@@ -18,4 +21,3 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
