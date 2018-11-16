@@ -301,4 +301,337 @@
   console.log(r.toString())
   ```
 
+
+
+
+- 使用JS判断数组里的元素是不是素数
+
+- ```js
+  function get_primes(arr) {
+      var result = arr.filter(function(x) {
+          var r = true;
+          if(x === 1) {
+          	r = false
+          }
+          if(x === 2) {
+          	r = true
+          }
+          for(var i=0; i < x; i++) {
+              if(x % i === 0){
+              	r = false;
+                  break;
+              } else {
+                  r = true
+              }
+          }
+          return r;
+      })
+      return result
+  }
+  ```
+
+
+
+
+
+- sort比较函数  是采用原地算法（即输出的值会替换原有的值）进行排序
+
+- ```js
+  function compare(a, b) {
+      if(a < b) {
+         return -1
+      }
+      if(a > b) {
+         return 1   
+      }
+      return 0;
+  }
+  
+  或者 
+  
+  arr.sort((a, b) => a - b)
+  ```
+
+
+
+
+
+- 闭包
+- 即使每次调用时传入的参数一样，但得出的结果也不会相等。因为每次闭包都会返回一个新的函数
+- 使用闭包，返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+
+
+
+- 箭头函数的`this`指向词法作用域
+
+  ```js
+  JavaScript 采用词法作用域(lexical scoping)，也就是静态作用域.
+  
+  因为 JavaScript 采用的是词法作用域，函数的作用域在函数定义的时候就决定了。
+  
+  而与词法作用域相对的是动态作用域，函数的作用域是在函数调用的时候才决定的。
+  var value = 1;
+  
+  function foo() {
+      console.log(value);
+  }
+  
+  function bar() {
+      var value = 2;
+      foo();
+  }
+  
+  bar();
+  
+  // 结果是 ???
+  假设JavaScript采用静态作用域，让我们分析下执行过程：
+  
+  执行 foo 函数，先从 foo 函数内部查找是否有局部变量 value，如果没有，就根据书写的位置，查找上面一层的代码，也就是 value 等于 1，所以结果会打印 1。
+  
+  假设JavaScript采用动态作用域，让我们分析下执行过程：
+  
+  执行 foo 函数，依然是从 foo 函数内部查找是否有局部变量 value。如果没有，就从调用函数的作用域，也就是 bar 函数内部查找 value 变量，所以结果会打印 2。
+  
+  前面我们已经说了，JavaScript采用的是静态作用域，所以这个例子的结果是 1
+  ```
+
+- 使用`generator`改写闭包函数
+
+- ```js
+  function *fn(){
+      var current_id = 1;
+      while(true) {
+      	yield current_id ++;      
+      }
+  }
+  fn().next()
+  //{value:1 ,done: false}
+  
+  next()方法会执行generator的代码，然后，每次遇到yield x;就返回一个对象{value: x, done: true/false}，然后“暂停”。返回的value就是yield的返回值，done表示这个generator是否已经执行结束了。如果done为true，则value就是return的返回值。
+  ```
+
+
+
+- `js`包装对象     脑子瓦特了可能用一用
+
+- ```js
+  var n = new Number(123) //123 生成了新的包装类型
+  var b = new Boolean(true); // true,生成了新的包装类型
+  var s = new String('str'); // 'str',生成了新的包装类型
+  
+  虽然包装对象看上去和原来的值一模一样，显示出来也是一模一样，但他们的类型已经变为object了！所以，包装对象和原始值用===比较会返回false
+  ```
+
+
+
+- `JSON.stringfy(xiaoming, ['name', 'skills'],'  ')`
+- 该方法用于序列化一个对象， 第二个参数是用来筛选对象中每一个属性， 可以是函数，也可以像上方一样是个数组，第三个参数是美化用的，代表有多少空格；上限为10.
+
+- 除此之外， 还可以按照如下的方式`定义一个toJSON()`去控制输出
+
+- ```js
+  var xiaoming = {
+      name: '小明',
+      age: 14,
+      gender: true,
+      height: 1.65,
+      grade: null,
+      'middle-school': '\"W3C\" Middle School',
+      skills: ['JavaScript', 'Java', 'Python', 'Lisp'],
+      toJSON: function () {
+          return { // 只输出name和age，并且改变了key：
+              'Name': this.name,
+              'Age': this.age
+          };
+      }
+  };
+  
+  JSON.stringify(xiaoming); // '{"Name":"小明","Age":14}'
+  ```
+
+- - 反序列化`JSON.parse()`把它变成一个`javascript`对象
+
+  - ```js
+    把JSON格式的字符串，变成javaScript对象
+    JSON.parse('[1, 2, 3, true]'); // [1, 2, 3, true]
+    JSON.parse('{"name":"小明","age":14}'); // Object {name: '小明', age: 14}
+    JSON.parse('true'); // true
+    JSON.parse('123.45'); // 123.45
+    ```
+
+  - `JSON.parse(text[, revier])`包含有两个参数，一是被解析文本，而是解析过程中所涉及的函数，但是要注意该函数会先从前往后 =》解析同级，当同级中又包含下一级元素时，会解析完当前同级所有的元素后，解析包含下一级的元素时，从里向外解析，然后再解析最外层。 eg:
+
+  - ```js
+    JSON.parse('{"p": 5}', function (k, v) {
+        if(k === '') return v;     // 如果到了最顶层，则直接返回属性值，
+        return v * 2;              // 否则将属性值变为原来的 2 倍。
+    });                            // { p: 10 }
+    
+    JSON.parse('{"1": 1, "2": 2,"3": {"4": 4, "5": {"6": 6}}}', function (k, v) {
+        console.log(k); // 输出当前的属性名，从而得知遍历顺序是从内向外的，
+                        // 最后一个属性名会是个空字符串。
+        return v;       // 返回原始属性值，相当于没有传递 reviver 参数。
+    });
+    //1, 2, 4, 6, 5, 3, ""
+    ```
+
+  - 注意 ！！！ `JSON.parse()`解析的元素，不允许使用逗号作为结尾！！！
+
+
+
+
+
+- 面向对象编程
+
+- 下面看一个例子：
+
+- ``` js
+  现在有一个学生对象Student
+  var Student = {
+      name: 'Robot',
+      height: 1.2,
+      run: function () {
+          console.log(this.name + ' is running...');
+      }
+  };
+  创建出 ·小明·  这个对象
+  var xiaoming = {
+      name: '小明'
+  };
+  
+  xiaoming.__proto__ = Student; 把 xiaoming 的原型指向了对象Student
+  
+  此时小明就具有了Student的一些属性和方法
+  xiaoming.name; // '小明'
+  xiaoming.run(); // 小明 is running...
+  ```
+
+- 由此可以看出，JavaScript的原型链和Java的Class区别就在，它没有“Class”的概念，所有对象都是实例，所谓继承关系不过是把一个对象的原型指向另一个对象而已。
+
+- 一般来说，不要直接使用`obj.__proto__`去改变一个对象的原型，并且，低版本的IE也无法使用`__proto__`，通常采用`Object.create()`方法，该方法传入一个原型对象，并创建一个基于该原型的新对象，但是新对象没有任何属性。
+
+- ```js
+  // 原型对象:
+  var Student = {
+      name: 'Robot',
+      height: 1.2,
+      run: function () {
+          console.log(this.name + ' is running...');
+      }
+  };
+  
+  function createStudent(name) {
+      // 基于Student原型创建一个新对象:
+      var s = Object.create(Student);
+      // 初始化新对象:
+      s.name = name;
+      return s;
+  }
+  
+  var xiaoming = createStudent('小明');
+  xiaoming.run(); // 小明 is running...
+  xiaoming.__proto__ === Student; // true
+  ```
+
+- ![1542336513546](D:\F\笔记配图\%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1542336513546.png)
+
+
+
+- 构造函数
+
+- JavaScript还可以用一种构造函数的方法来创建对象。它的用法是，先定义一个构造函数：
+
+- ```js
+  function Student(name) {
+      this.name = name;
+      this.hello = function () {
+          alert('Hello, ' + this.name + '!');
+      }
+  }
+  
+  var xiaoming = new Student('小明');
+  xiaoming.name; // '小明'
+  xiaoming.hello(); // Hello, 小明!
+  ```
+
+- *注意*，如果不写`new`，这就是一个普通函数，它返回`undefined`。但是，如果写了`new`，它就变成了一个构造函数，它绑定的`this`指向新创建的对象，并默认返回`this`，也就是说，不需要在最后写`return this;`。
+
+- 用`new Student()`创建的对象还从原型上获得了一个`constructor`属性，它指向函数`Student`本身：
+
+- ```js
+  xiaoming.constructor === Student.prototype.constructor; // true
+  Student.prototype.constructor === Student; // true
+  
+  Object.getPrototypeOf(xiaoming) === Student.prototype; // true
+  
+  xiaoming instanceof Student; // true
+  ```
+
+- ![1542338584995](D:\F\笔记配图\%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1542338584995.png)
+
+**__proto__是每个对象都有的一个属性，而prototype是函数才会有的属性!!!** 
+**使用Object.getPrototypeOf()代替__proto__!!!**
+
+- ```js
+  function Student(props) {
+      this.name = props.name || '匿名'; // 默认值为'匿名'
+      this.grade = props.grade || 1; // 默认值为1
+  }
+  
+  Student.prototype.hello = function () {
+      alert('Hello, ' + this.name + '!');
+  };
+  
+  function createStudent(props) {
+      return new Student(props || {})
+  }
+  ```
+
+
+
+
+
+- `class`继承
+
+- 要记得`class`的目的就是让定义类更简单
+
+- 先回顾用函数实现`student`的方法：
+
+- ```js
+  function Student(name) {
+      this.name = name;
+  }
+  
+  Student.prototype.hello = function() {
+      alert('Hello, ' + this.name + '!')
+  }
+  ```
+
+- 现在看新的`class`关键字来编写`Student`, 可以这样写：
+
+- ```js
+  class Student{
+      constructor(name) {
+          this.name = name;
+      }
+      hello() {
+          alert('Hello, '+ this.name + '!')
+      }
+  }
+  ```
+
+- 继承
+
+- ```js
+  class PrimaryStudent extends Student {
+      constructor(name, grade) {
+          super(name);   //调用父类的构造方法
+          this.grade = grade;
+      }
+      myGrade() {
+          alert('I am at grade ' + this.grade );
+      }
+  }
+  ```
+
 - 
