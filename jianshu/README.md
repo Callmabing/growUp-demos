@@ -1,44 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+记录点：
 
-## Available Scripts
+向函数传参
 
-In the project directory, you can run:
+1.  ``` js
+   // 向该函数传参数
+   const getListArea = (show) => {
+       return show && (
+               <SearchInfo>
+               <SearchInfoTitle>
+                   热门搜索
+                   <SearchInfoSwitch>换一批</SearchInfoSwitch>
+               </SearchInfoTitle>
+               <UlBox>
+                   <LiItem><LiItemA>区块链</LiItemA></LiItem>
+                   <LiItem><LiItemA>带你看世界</LiItemA></LiItem>
+                   <LiItem><LiItemA>艺术人生</LiItemA></LiItem>
+                   <LiItem><LiItemA>小程序</LiItemA></LiItem>
+                   <LiItem><LiItemA>小程序</LiItemA></LiItem>
+               </UlBox>
+           </SearchInfo>
+       )
+   }
+   const fn = () => {
+       return (
+       	{getListArea('参数')}
+       )
+   }
+    ```
 
-### `npm start`
+2. 返回时，可以按照如下格式返回，当返回结果为真时
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```js
+return xxx && ()
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+3. `immutable.js`这个插件会让数据持久化，当给数据赋值初始值时，就会被转换成`immutable`的对象，
 
-### `npm test`
+   此时如果继续向里面添加内容，会导致错误，因为数据结构已经不再是初始值的内容：
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   可按照如下方法解决：
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```js
+   import { fromJS } from 'immutable';
+   
+   reducer中初始值：
+   import { fromJS } from 'immutable';
+   
+   const defaultState = fromJS({  
+     focused: false,
+     list: [] // 1. 此处采用了formJS 
+   });
+   。。。 。。。
+   case type.CHANGE_LIST:
+         return state.set('list', action.data) // 3.  这样数据才能存放进入
+   。。。 。。。
+   
+   
+   在actions中派发action:
+   const change_list = (data) => ({
+     type: type.CHANGE_LIST,
+     data: fromJS(data) // 2. 此处应与之对应
+   })
+   export const getList = () => {
+     return (dispatch) => {
+       axios.get('/api/headerList.json').then((res) => {
+         const { data } = res.data;
+         dispatch(change_list(data));
+       }).catch(() => {
+         console.log('error');
+       })
+     }
+   }
+   ```
