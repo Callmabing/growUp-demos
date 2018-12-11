@@ -634,4 +634,70 @@
   }
   ```
 
+
+
+
+
+
+- Promise
+
+- 生成一个0-2之间的随机数，如果小于1，则等待一段时间后返回成功，否则返回失败。
+
+- ```js
+  function test(resolve, reject) {
+      var timeOut = Math.random() * 2;
+      console.log('set timeout to: ' + timeOut + 'seconds.');
+      setTimeout(function (){
+          if(timeOut<1) {
+              console.log('call resolve()...');
+              resolve('200 OK');
+          }else {
+              console.log('call reject()...');
+              reject('timeout in'+ timeOut + 'seconds.');
+          }
+      }, timeOut * 1000)
+  }
+  var p = new Promise(test).then(function(result) {
+      console.log('成功：' + result);
+  }).catch(function (reason){
+      console.log('失败：'+ reason);
+  })
+  ```
+
+
+
+- `JQuery`
+
+- - 选择器 
+
+  - - 按`tag`查找 var ps = $('p');
+
+    - 按`class`查找 var a = $ ('.red');   包含多个`class`节点 `var a = $('.red.green')`
+
+    - 按属性查找  `var email = $('[name=email]')`当属性的值包含特殊字符时应当使用双引号括起来`var passwordInput = $('[items = "A B"]')`
+
+    - 按属性的前缀或后缀进行查找 `var icon = $('[name^=icon]')` 能查找到name="icon-1",name="icon-2"&& `var icons = $('[name$=with]')`能查找到name="startwith",name="endwith"      这个查找方法尤其适合class属性查找，且不受class包含多个名称的影响   `var icons = $('[class^="icon-"]')`
+
+    - 组合查找  `var emailInput = $('input[name=email]')`
+
+      ​	       	 `var tr = $('tr.red')`
+
+      ​		 `$('p.red,p.green')`
+
+
+
+
+
+- 事件触发的条件
+
+- 一个需要注意的问题是，事件的触发总是由用户操作引发的。例如，我们监控文本框的内容改动：
+
+- ```js
+  var input = $('#test-input')
+  input.change(function () {
+      console.log('changed...');
+  })
+  用户输入时会触发该change事件，但是使用js去改变里面的值得时候，change函数却不会被触发 此时可能需要input.change()或者input.trigger('change')
+  ```
+
 - 
