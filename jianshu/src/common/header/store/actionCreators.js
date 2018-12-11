@@ -10,7 +10,8 @@ export const searchBlur = () => ({
 })
 const change_list = (data) => ({
   type: type.CHANGE_LIST,
-  data: fromJS(data)
+  data: fromJS(data),
+  totalPage: Math.ceil(data.length/8)
 })
 export const getList = () => {
   return (dispatch) => {
@@ -22,3 +23,16 @@ export const getList = () => {
     })
   }
 }
+// 更改搜索推荐的显示状态
+export const mouseEnter = () => ({
+  type: type.MOUSE_ENTER
+})
+
+export const mouseLeave = () => ({
+  type: type.MOUSE_LEAVE
+})
+
+// 切换页面
+export const changePage = () => ({
+  type: type.CHANGE_PAGE
+})

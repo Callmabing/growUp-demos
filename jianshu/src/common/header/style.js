@@ -42,7 +42,7 @@ export const NavItem = styled.div`
 export const SearchWrapper = styled.div`
     float: left;
     position: relative;
-    .iconfont {
+    .zoom {
         position: absolute;
         right: 5px;
         bottom: 5px;
@@ -130,6 +130,17 @@ export const LiItemA = styled.a`
 export const SearchInfoSwitch = styled.div`
     float: right;
     font-size: 13px;
+    &:hover {
+        cursor: pointer
+    }
+    .spin {
+        display: block;
+        margin-right: 5px;
+        font-size: 12px;
+        transition: all .2s ease-in;
+        transform-origin: center center;
+        float: left;
+    }
 `;
 export const Addition = styled.div`
     position: absolute;
