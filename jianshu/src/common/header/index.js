@@ -55,8 +55,9 @@ class Header extends Component {
         )
     }
     render() {
+        const { top } = this.props;
         return (
-            <HeaderWrapper>
+            <HeaderWrapper top={top}>
                 <Logo />
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>

@@ -5,7 +5,6 @@ export const HomeWrapper = styled.div`
   justify-content: space-between;
   width: 960px;
   height: 300px;
-  background: yellow;
   margin: 0 auto;
 `;
 
@@ -19,8 +18,8 @@ export const HomeLeft = styled.div`
 `;
 
 export const HomeRight = styled.div`
-  width: 240px;
-  background: green;
+  width: 280px;
+  padding-top: 25px;
 `;
 
 export const TopicWrapper = styled.div`
@@ -80,3 +79,11 @@ export const ListInfo = styled.div`
     color: #999;
   }
 `;
+
+export const RecommendBox = styled.div`
+  width: 100%;
+`; 
+export const RecommendItem = styled.img`
+  height: 50px;
+  margin-bottom: 6px;
+`

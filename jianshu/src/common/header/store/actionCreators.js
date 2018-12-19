@@ -8,11 +8,13 @@ export const searchFoucs = () => ({
 export const searchBlur = () => ({
   type: type.SEARCH_BLUR
 })
+
 const change_list = (data) => ({
   type: type.CHANGE_LIST,
   data: fromJS(data),
   totalPage: Math.ceil(data.length/8)
 })
+
 export const getList = () => {
   return (dispatch) => {
     axios.get('/api/headerList.json').then((res) => {

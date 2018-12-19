@@ -8,13 +8,28 @@ import Home from './pages/home/index';
 import Detail from './pages/detail/index';
 
 class App extends Component {
+  state = {
+    top: ''
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    this.setState({
+      top: 'fixed'
+    })
+  }
+
   render() {
+    const { top } = this.state;
     return (
       <Provider store={store}>
         <>
-          <Header />
+          <Header top={top}/>
           <Router>
-            <div>
+            <div style={{ paddingTop: '58px' }}>
               <Route exact path='/' component={Home}></Route>
               <Route exact path='/detail' component={Detail}></Route>
               {/* <Route exact path='/' render={() => <Home/>}></Route> */}
