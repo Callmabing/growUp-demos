@@ -86,4 +86,100 @@ export const RecommendBox = styled.div`
 export const RecommendItem = styled.img`
   height: 50px;
   margin-bottom: 6px;
-`
+`;
+export const DownLoad = styled.div`
+  position: relative;
+  padding: 10px 22px;
+  margin-bottom: 30px;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  background-color: #fff;
+  box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+export const DownInfo = styled.span`
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  p {
+    font-size: 14px;
+    color: #333;
+  }
+  b {
+    margin-top: 4px;
+    font-weight: nomarl;
+    font-size: 12px;
+    color: #999;
+  }
+`;
+export const DownLoadImgBox = styled.div`
+  display: ${props => (props.getDownLoadImg ? 'block' : 'none')}
+  position: absolute;
+  top: -181px;
+  left: 51px;
+  padding: 10px;
+  width: 184px;
+  height: 184px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+`;
+export const DownLoadImg = styled.img`
+  width: 164px;
+  height: 164px;
+`;
+export const WriterTop = styled.div`
+  width: 100%;
+  font-size: 14px;
+  color: #969696;
+`;
+export const WriterChange = styled.span`
+  float: right;
+  font-size: 14px;
+  color: #969696;
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
+  i {
+    font-size: 14px;
+    margin-right: 5px;
+  }
+`;
+
+export const WriterList = styled.ul`
+  width: 100%;
+  margin: 0px 0px 20px;
+`;
+export const WriterListItem = styled.li`
+  width: 100%;
+  margin-top: 15px;
+  box-sizing: border-box;
+`;
+export const WriterImg = styled.img`
+  float: left;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+`;
+export const WriterFocus = styled.a`
+  display: inline-block;
+  float: right;
+  font-size: 13px;
+  padding-top: 5px;
+`;
+export const WriterName = styled.p`
+  padding-top: 5px;
+  padding-left: 63px;
+`;
+export const WriterInfo = styled.p`
+  margin-top: 10px;
+  padding-left: 63px;
+  font-size: 12px;
+  color: #969696;
+`;

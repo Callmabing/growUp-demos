@@ -92,7 +92,7 @@ class Header extends Component {
         )
     }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { 
     return {
         focused: state.getIn(['header', 'focused']),
         // .get('header').get('focused')
@@ -119,6 +119,7 @@ const mapDispathToProps = (dispatch) => {
         },
         handleChangePage(dom) {
             let originAngle = dom.style.transform.replace(/[^0-9]/ig, '');
+            
             if (originAngle) {
                 originAngle = parseInt(originAngle, 10);
             }else {

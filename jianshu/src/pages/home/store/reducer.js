@@ -53,7 +53,8 @@ const defaultState = fromJS({
     desc: '众所周知，娱乐圈是有很多撞脸明星的！ 他们本来是八竿子打不着，没有任何关系的，但是由于长相极度相似，这也让不少网友有种哭笑不得的感觉，毕竟她们太...',
     img: '//upload-images.jianshu.io/upload_images/2321684-837c244ef687cb70?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
   }],
-  recommendList: []
+  recommendList: [],
+  showDownImg: false
 });
 
 export default (state = defaultState, action) => {
@@ -61,6 +62,10 @@ export default (state = defaultState, action) => {
     case type.GET_RECOMMEND:
       console.log(action.data);
       return state.set('recommendList', action.data);
+    case type.MOUSE_ENTER:
+      return state.set('showDownImg', true);
+    case type.MOUSE_LEAVE:
+      return state.set('showDownImg', false);
     default:
       return state;
   }

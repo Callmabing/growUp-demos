@@ -17,3 +17,12 @@ export const getRecommendList = () => {
     })
   }
 }
+
+// 鼠标移入时显示大的二维码
+export const getDownLoadImg = () => ({
+  type: type.MOUSE_ENTER
+})
+// 鼠标移出时不显示二维码
+export const hideDownLoadImg = () => ({
+  type: type.MOUSE_LEAVE
+})

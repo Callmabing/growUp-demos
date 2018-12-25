@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
+import NoteBookList from '@/components/NoteBookList'
+import NoteDetail from '@/components/NoteDetail'
+import TashDetail from '@/components/TashDetail'
 
 Vue.use(Router)
 
@@ -16,6 +19,21 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/notebooks',
+      name: 'Notebooks',
+      component: NoteBookList
+    },
+    {
+      path: '/note/:noteId',
+      name: 'NoteDetail',
+      component: NoteDetail
+    },
+    {
+      path: '/trash/:noteId',
+      name: 'TashDetail',
+      component: TashDetail
     }
   ]
 })
