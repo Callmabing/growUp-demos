@@ -26,8 +26,12 @@ export default function request(url, type = 'GET', data = {}) {
       }else {
         Message.error(res.data.msg);
         reject(res.data)
+        console.log(res)
       }
     }).catch(err => {
+      // 请求压根没有成功 才会报网络错误
+      console.log('hahaha~')
+      Message.error('网络异常');
       reject({msg: '网络异常'})
     })
   })
